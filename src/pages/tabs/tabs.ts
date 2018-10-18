@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { DomSanitizer } from '@angular/platform-browser';
 import { AboutPage } from '../about/about';
 import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
@@ -8,12 +8,10 @@ import { HomePage } from '../home/home';
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
-
-  tab1Root = HomePage;
-  tab2Root = AboutPage;
-  tab3Root = ContactPage;
-
-  constructor() {
-
+  url;
+  constructor(
+    private _sanitizer: DomSanitizer
+  ) {
+    this.url = this._sanitizer.bypassSecurityTrustResourceUrl('http://servicedesk.optmize.com.br');
   }
 }
